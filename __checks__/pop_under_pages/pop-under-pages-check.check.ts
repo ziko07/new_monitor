@@ -5,10 +5,9 @@
 */
 
 import { BrowserCheck, Frequency, RetryStrategyBuilder } from 'checkly/constructs'
-import { pop_under_pages_group } from './pop_under_pages';  // Import the group
-
-new BrowserCheck('pop_under_pages', {
-  name: 'pop_under_pages mobile and desktop check',
+import { pop_under_pages_group } from './pop-under-pages'
+new BrowserCheck('pop-under-pages-check', {
+  name: 'pop under pages check',
   activated: true,
   muted: false,
   shouldFail: false,
@@ -20,7 +19,7 @@ new BrowserCheck('pop_under_pages', {
   environmentVariables: [],
   group: pop_under_pages_group,
   code: {
-    entrypoint: './pop_under_pages.spec.ts',
+    entrypoint: './pop-under-pages-check.spec.ts',
   },
   retryStrategy: RetryStrategyBuilder.linearStrategy({
     baseBackoffSeconds: 60,
