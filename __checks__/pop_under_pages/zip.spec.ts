@@ -22,7 +22,7 @@ test.use({ actionTimeout: 20000 })
  
 
 const urls = [
-  // { url: 'https://smartfinancial.com/auto-insurance', zipName: 'zip' },
+  { url: 'https://smartfinancial.com/auto-insurance', zipName: 'zip' },
   { url: 'https://generateinsurancequotes.com/', zipName: 'zipcode' },
   { url: 'https://unitedstatesinsurance.com/', zipName: 'zip' },
   { url: 'https://homeownersinsurancecompare.com/', zipName: 'zip' },
