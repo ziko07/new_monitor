@@ -3,6 +3,7 @@ import { test, expect } from "@playwright/test"
 test.describe("Check contactability.com and admin", () => {
 
   test("Contactability.com", async ({ request }) => {
+    console.log("Tesinging https://contactability.com/")
     const response = await request.get(`https://contactability.com/`)
     expect(response).toBeOK()
   })

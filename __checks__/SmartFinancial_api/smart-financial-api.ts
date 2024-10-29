@@ -21,10 +21,13 @@ export const smart_financial_api =  new CheckGroup('smart-financial-api', {
     queryParameters: [],
    
   },
-  retryStrategy: RetryStrategyBuilder.linearStrategy({
-    baseBackoffSeconds: 60,
-    maxRetries: 2,
-    maxDurationSeconds: 600,
-    sameRegion: true,
-  }),
+  // retryStrategy: RetryStrategyBuilder.linearStrategy({
+  //   baseBackoffSeconds: 60,
+  //   maxRetries: 2,
+  //   maxDurationSeconds: 600,
+  //   sameRegion: true,
+  // }),
 })
+
+
+ 

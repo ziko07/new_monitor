@@ -20,21 +20,20 @@ test.use({ actionTimeout: 10000 })
 
 // Define URLs for each lead type
 const leadUrls = {
-  auto: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=auto&form_id=1',
-  home: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=home&form_id=1',
-  health: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=health&form_id=1',
-  life: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=life&form_id=1',
-  medicare: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=medicare&form_id=1',
-  commercial: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=commercial&form_id=1',
-  renter: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=renter&form_id=1'
+  Auto: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=auto&form_id=1',
+  Home: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=home&form_id=1',
+  Health: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=health&form_id=1',
+  Life: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=life&form_id=1',
+  Medicare: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=medicare&form_id=1',
+  Commercial: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=commercial&form_id=1',
+  Renters: 'https://smartfinancial.com/quote/rates.html?aid=60&cid=48&sid=checkly_test&tid=&ks=&zip=77501&lead_type=renter&form_id=1'
 };
-
 
  
 
 
-
 for (const [leadType, url] of Object.entries(leadUrls)) {
+  console.log("Tesinging", url)
   test(`Pop Under Pages for ${leadType} - Mobile`, async ({ browser }) => {
     const deviceNames = ['iPhone 11 Pro', 'iPhone 12', 'Galaxy S8', 'iPhone SE', 'Pixel 5'];
     const selectedDevice = deviceNames[getRandomIndex(deviceNames.length)];
@@ -42,12 +41,12 @@ for (const [leadType, url] of Object.entries(leadUrls)) {
 
     const page = await browser.newPage({ ...dev });
     await page.goto(url);
-    await final_result(page, leadType);
+    await final_result(page, leadType, 'Pop_Under_Mobile');
   });
 
-  test(`Pop Under Pages for ${leadType} - Desktop`, async ({ page }) => {
+  test(`${leadType} Pop Under Pages for  - Desktop`, async ({ page }) => {
     await page.goto(url);
-    await final_result(page, leadType);
+    await final_result(page, leadType, 'Pop_Under_Desktop');
   });
 }
 
@@ -57,7 +56,7 @@ for (const [leadType, url] of Object.entries(leadUrls)) {
 
 
 
-async function final_result(page, leadType) {
+async function final_result(page, leadType, deviceType) {
 
   await page.waitForSelector('#result-listing-container', { state: 'visible', timeout: 20000 });
   const resultListingContainer = await page.locator('#result-listing-container');
@@ -67,6 +66,7 @@ async function final_result(page, leadType) {
   const resultCount = await resultItems.count();
   console.log(`for ${leadType} Lead Type  company-insurance-item Count is ${resultCount}`)
   expect(resultCount).toBeGreaterThan(0);
+  await page.screenshot({ path: `screenshots/${leadType}_${deviceType}.png`, fullPage: true });
 
 }
 
@@ -74,4 +74,3 @@ async function final_result(page, leadType) {
 function getRandomIndex(length) {
   return Math.floor(Math.random() * length);
 }
-

@@ -149,8 +149,8 @@ async function step_name(page) {
   const lastName = await page.locator('input[placeholder="Last Name"]')
   await expect(firstName).toBeVisible()
   await expect(lastName).toBeVisible()
-  await firstName.fill("Jane")
-  await lastName.fill("Doe")
+  await firstName.fill("Jane", { delay: 100 });
+  await lastName.fill("Doe", { delay: 100 });
   const btn_name = await name_div.locator('a.btn.btn-custom.btn-block');
   await expect(btn_name).toBeVisible()
   await btn_name.click();

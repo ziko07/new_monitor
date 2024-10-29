@@ -27,6 +27,7 @@ test("Auto Rapidfire Lead Mobile Test", async ({ browser }) => {
   const randomIndex = getRandomIndex(deviceNames.length);
   const selectedDevice = deviceNames[randomIndex];
 
+  console.log("Tesinging Auto Rapidfire Lead Mobile Test")
   const dev = devices[selectedDevice];
   // iPhone 11 Pro, iPhone12, Galaxy S8, iPhone SE, Pixel 5
   // Initialize a new page
